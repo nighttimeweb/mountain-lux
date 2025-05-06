@@ -1,0 +1,907 @@
+/* new_style.css - Luxury Mountain Life Annuities Homepage */
+
+/* --- Global Resets & Base Styles --- */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Luxury Green Palette */
+    --deep-forest-green: #1a3a2a; /* Darker, richer green */
+    --moss-green: #6b8e23; /* Earthy moss */
+    --earth-brown: #8b4513; /* Subtle earth tone */
+    --clean-white: #f8f9fa; /* Slightly off-white for softness */
+    --glass-bg: rgba(248, 249, 250, 0.1); /* Very subtle white tint for glass */
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --text-primary: #e8e6e3; /* Light, warm grey for text on dark backgrounds */
+    --text-secondary: #a0a0a0; /* Softer grey for secondary text */
+    --accent-gold: #b8860b; /* Muted gold for subtle highlights */
+
+    /* Elegant Typography */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Lato', sans-serif;
+
+    /* Transitions & Effects */
+    --transition-smooth: 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    --transition-fast: 0.3s ease-out;
+    --blur-effect: blur(12px);
+    --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --shadow-strong: 0 15px 45px rgba(0, 0, 0, 0.2);
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px; /* Base font size */
+}
+
+body {
+    font-family: var(--font-body);
+    line-height: 1.7;
+    color: var(--text-primary);
+    background-color: var(--deep-forest-green); /* Dark base background */
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.container-luxury {
+    width: 90%;
+    max-width: 1300px; /* Wider for premium feel */
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--clean-white);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 0.75em;
+}
+
+h1 { font-size: clamp(3rem, 6vw, 5rem); }
+h2 { font-size: clamp(2.2rem, 4.5vw, 3.5rem); }
+h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+
+p {
+    margin-bottom: 1.5em;
+    color: var(--text-secondary);
+    font-weight: 300;
+    font-size: 1.1rem;
+}
+
+a {
+    color: var(--accent-gold);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+a:hover {
+    color: var(--clean-white);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px; /* More pronounced rounding */
+}
+
+/* --- Glass Panel Effect --- */
+.glass-panel {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: var(--blur-effect);
+    -webkit-backdrop-filter: var(--blur-effect);
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: var(--shadow-soft);
+    transition: transform var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.glass-panel:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-strong);
+}
+
+/* --- Preloader --- */
+.preloader {
+    position: fixed;
+    inset: 0;
+    background-color: #11271d; /* Deep forest green */
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1s ease, visibility 1s ease;
+}
+
+.preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Glowing logo box */
+.preloader-logo-block {
+    padding: 30px;
+    border-radius: 24px;
+    background-color: rgba(255, 255, 255, 0.02);
+    box-shadow: 0 0 90px rgba(184, 134, 11, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+.preloader-logo-block img {
+    width: 420px;
+    height: auto;
+    margin-bottom: 0px;
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.7)) brightness(1.15);
+}
+
+/* Progress bar and fill */
+.preloader-bar {
+    width: 280px;
+    height: 6px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 100px;
+    overflow: hidden;
+    margin-top: 0px;
+    opacity: 0;
+    animation: fadeIn 0.3s ease-out forwards;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background-color: var(--accent-gold);
+    border-radius: 100px;
+    transition: width linear;
+}
+
+/* Fade in effect */
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+/* --- Header --- */
+.site-header-luxury {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 20px 0;
+    background: rgba(26, 58, 42, 0.5); /* Keep dark green tint, slightly opaque */
+    backdrop-filter: blur(28px); /* Frosted effect */
+    -webkit-backdrop-filter: blur(28px);
+    transition: background-color var(--transition-smooth), padding var(--transition-smooth), box-shadow var(--transition-smooth);
+}
+
+.site-header-luxury.scrolled {
+    background: rgba(255, 255, 255, 0.95); /* Light frosted white */
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    padding: 15px 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+.site-header-luxury .container-luxury {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* --- Logo Fix --- */
+.logo-luxury a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.site-logo {
+    max-height: 64px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+  }
+  
+/* --- Navigation --- */
+.main-nav-luxury ul {
+    list-style: none;
+    display: flex;
+    gap: 35px;
+}
+
+.main-nav-luxury ul li a {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 8px;
+    transition: color var(--transition-fast);
+}
+
+.main-nav-luxury ul li a:hover {
+    color: var(--clean-white);
+}
+
+.main-nav-luxury ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 1px;
+    background-color: var(--accent-gold);
+    transition: width var(--transition-smooth);
+}
+
+.main-nav-luxury ul li a:hover::after {
+    width: 100%;
+}
+
+/* --- Dropdown Menu --- */
+.dropdown-luxury {
+    position: relative;
+}
+
+.dropdown-menu-luxury {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgba(26, 58, 42, 0.6); /* Dark green semi-transparent */
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(18px); /* Stronger blur */
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: 12px;
+    min-width: 200px;
+    padding: 10px 0;
+    margin-top: 10px;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown-luxury:hover .dropdown-menu-luxury {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu-luxury li {
+    margin: 0;
+}
+
+.dropdown-menu-luxury li a {
+    display: block;
+    padding: 12px 20px;
+    color: var(--clean-white); /* High contrast text */
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.dropdown-menu-luxury li a:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: var(--accent-gold);
+}
+
+/* Header CTA Button */
+.cta-button-header {
+    background: var(--accent-gold);
+    color: var(--deep-forest-green);
+    padding: 10px 25px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+    margin-left: 20px;
+}
+
+.cta-button-header:hover {
+    background-color: var(--clean-white);
+    color: var(--deep-forest-green);
+    transform: scale(1.05);
+}
+
+/* Mobile Nav Toggle */
+.mobile-nav-toggle {
+    display: none; /* Hidden by default */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+}
+
+.mobile-nav-toggle span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background-color: var(--clean-white);
+    margin: 5px 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* --- Hero Section --- */
+.hero-luxury {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--clean-white);
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.hero-background video, .hero-background img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Add filter for cinematic look if needed: filter: brightness(0.8) contrast(1.1); */
+}
+
+.hero-overlay-luxury {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(26, 58, 42, 0.3), rgba(26, 58, 42, 0.8)); /* Subtle gradient */
+    z-index: 2;
+}
+
+.hero-content-luxury {
+    position: relative;
+    z-index: 3;
+    max-width: 800px;
+}
+
+.hero-luxury h1 {
+    margin-bottom: 0.5em;
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+    /* Animation handled by JS */
+}
+
+.hero-luxury p {
+    font-size: 1.3rem;
+    margin-bottom: 2em;
+    font-weight: 300;
+    color: var(--text-primary);
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+    /* Animation handled by JS */
+}
+
+.cta-button-hero {
+    display: inline-block;
+    background: var(--accent-gold);
+    color: var(--deep-forest-green);
+    padding: 18px 45px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform var(--transition-fast), box-shadow var(--transition-smooth), background-color var(--transition-fast);
+    box-shadow: 0 8px 25px rgba(184, 134, 11, 0.3);
+    border: none;
+    cursor: pointer;
+}
+
+.cta-button-hero:hover {
+    background-color: var(--clean-white);
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 35px rgba(184, 134, 11, 0.4);
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    z-index: 3;
+    opacity: 0;
+    animation: fadeIn 1s 2s ease-out forwards;
+    /* Add subtle bounce animation */
+}
+
+/* --- General Section Styling --- */
+section {
+    padding: 100px 0;
+    position: relative;
+}
+
+/* --- Intro Section --- */
+.intro-luxury {
+    margin-top: -50px; /* Overlap with hero */
+    position: relative;
+    z-index: 10;
+}
+
+.intro-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 50px;
+    align-items: center;
+}
+
+.intro-text h2 {
+    margin-bottom: 1em;
+}
+
+.intro-text p {
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.link-arrow {
+    display: inline-block;
+    margin-top: 1.5em;
+    font-weight: 700;
+    color: var(--accent-gold);
+    text-decoration: none;
+    position: relative;
+}
+
+.link-arrow::after {
+    content: ' →';
+    transition: transform var(--transition-fast);
+    display: inline-block;
+}
+
+.link-arrow:hover::after {
+    transform: translateX(5px);
+}
+
+.intro-visual img {
+    box-shadow: var(--shadow-strong);
+    transition: transform var(--transition-smooth);
+}
+
+.intro-visual img:hover {
+    transform: scale(1.03);
+}
+
+/* --- Annuities Section --- */
+.annuities-luxury {
+    background: linear-gradient(to bottom, var(--deep-forest-green), #122b1e); /* Slightly different dark green */
+}
+
+.annuities-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 60px;
+}
+
+.annuities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+}
+
+.annuity-details h3 {
+    margin-bottom: 1em;
+}
+
+.annuity-details ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 1.5em 0;
+}
+
+.annuity-details li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 10px;
+    color: var(--text-primary);
+    font-size: 1rem;
+}
+
+.annuity-details li::before {
+    content: '✓'; /* Checkmark */
+    color: var(--accent-gold);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 2px;
+}
+
+.cta-button-secondary {
+    display: inline-block;
+    background: transparent;
+    border: 1px solid var(--accent-gold);
+    color: var(--accent-gold);
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+    margin-top: 1em;
+}
+
+.cta-button-secondary:hover {
+    background-color: var(--accent-gold);
+    color: var(--deep-forest-green);
+}
+
+.annuity-rates h3 {
+    margin-bottom: 0.5em;
+}
+
+.rate-effective-date {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5em;
+}
+
+.rate-blocks {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 15px;
+    margin-bottom: 1.5em;
+}
+
+.rate-block {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.rate-term {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 5px;
+}
+
+.rate-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--clean-white);
+}
+
+.rate-disclaimer-luxury {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 1.5em;
+    margin-bottom: 1em;
+}
+
+/* --- Footer --- */
+.footer-luxury {
+    background-color: #122b1e; /* Darker footer background */
+    padding: 60px 0 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+}
+
+.footer-logo-contact .logo-luxury {
+    font-family: var(--font-heading);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--clean-white);
+    margin-bottom: 15px;
+}
+
+.footer-logo-contact p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.footer-logo-contact a {
+    color: var(--text-secondary);
+}
+
+.footer-logo-contact a:hover {
+    color: var(--accent-gold);
+}
+
+.footer-links h4, .footer-social-legal h4 {
+    font-family: var(--font-body);
+    font-weight: 700;
+    color: var(--clean-white);
+    font-size: 1rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.footer-links a:hover {
+    color: var(--accent-gold);
+}
+
+.social-link {
+    display: inline-block;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+.social-link:hover {
+    color: var(--accent-gold);
+}
+
+.footer-legal {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-credit {
+    display: block;
+    margin-top: 10px;
+    opacity: 0.7;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 992px) {
+    .main-nav-luxury {
+        display: none; /* Hide desktop nav */
+    }
+    .cta-button-header {
+        display: none; /* Hide header CTA on mobile */
+    }
+    .mobile-nav-toggle {
+        display: block; /* Show hamburger */
+    }
+
+    /* Add styles for opened mobile menu here */
+    .main-nav-luxury.mobile-open {
+        display: flex;
+        position: fixed;
+        inset: 0;
+        background: rgba(26, 58, 42, 0.95); /* Dark overlay */
+        backdrop-filter: var(--blur-effect);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 80px; /* Space for header */
+    }
+    .main-nav-luxury.mobile-open ul {
+        flex-direction: column;
+        gap: 30px;
+        text-align: center;
+    }
+    .main-nav-luxury.mobile-open ul li a {
+        font-size: 1.5rem;
+        color: var(--clean-white);
+    }
+    .main-nav-luxury.mobile-open .dropdown-menu-luxury {
+        position: static;
+        display: block;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 10px 0 0 0;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        margin-top: 10px;
+    }
+    .main-nav-luxury.mobile-open .dropdown-menu-luxury li a {
+        font-size: 1.2rem;
+        padding: 8px 0;
+        color: var(--text-secondary);
+    }
+/* === Annuity Calculator Styles === */
+.card {
+    background-color: var(--clean-white);
+    border-radius: 16px;
+    box-shadow: var(--shadow-soft);
+    padding: 2rem;
+    width: 100%;
+    max-width: 100%; /* Fits inside 1280px layout */
+    margin: 100px auto;
+    color: var(--deep-forest-green);
+  }
+  
+  .container-luxury {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  
+  @media (max-width: 300px) {
+    .two-panel-layout {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  /* Ensure visual consistency */
+  .input-column,
+  .results-column,
+  .chart-container,
+  canvas {
+    background-color: var(--clean-white) !important;
+  }
+  
+  .input-column, .results-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  /* Chart styling and containment */
+ /* Lock canvas and its container to grid-safe behavior */
+ .chart-container {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    padding: 1rem;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: var(--clean-white);
+    box-shadow: var(--shadow-soft);
+  }  
+
+  #projectionChart {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 100% !important;
+    box-sizing: border-box !important;
+    display: block !important;
+  }
+  
+  
+  /* Typography */
+  h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-family: var(--font-heading);
+    margin-bottom: 1rem;
+    color: var(--deep-forest-green);
+  }
+  
+  .subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2.5rem;
+  }
+  
+  label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    display: block;
+    color: var(--deep-forest-green);
+  }
+  
+  input[type="number"], input[type="range"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  input[type="range"] {
+    appearance: none;
+    background: #ddd;
+    height: 6px;
+    border-radius: 3px;
+    cursor: pointer;
+    accent-color: var(--moss-green);
+  }
+  
+  input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--moss-green);
+    border-radius: 50%;
+  }
+  
+  input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: var(--moss-green);
+    border-radius: 50%;
+    border: none;
+  }
+  
+  .apy-display, .result-value {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--deep-forest-green);
+  }
+  
+  .duration-label {
+    text-align: center;
+    margin-top: 0.5rem;
+    color: var(--text-secondary);
+  }
+  
+  .results-display {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+    gap: 1.5rem;
+  }
+  
+  .result-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+  }
+  
+  .disclaimer {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-top: 1rem;
+  }
+  
+  /* Mobile-specific tweaks */
+  @media (max-width: 640px) {
+    .card {
+      margin: 1.5rem auto;
+      padding: 1.5rem;
+    }
+  
+    .results-display {
+      flex-direction: column;
+    }
+  
+    .apy-display, .result-value {
+      font-size: 1.5rem;
+    }
+  }
+  
+}
+
+/* Add more sections styling (Map, Trust, FAQ, Contact) following this luxury theme */
+
+
