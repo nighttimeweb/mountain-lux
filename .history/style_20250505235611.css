@@ -187,13 +187,12 @@ img {
 }
 
 .site-header-luxury.scrolled {
-    background: rgba(255, 255, 255, 0.95); /* Light frosted white */
-    backdrop-filter: blur(28px);
-    -webkit-backdrop-filter: blur(28px);
+    background: rgba(26, 58, 42, 0.8); /* Dark green semi-transparent */
+    backdrop-filter: var(--blur-effect);
+    -webkit-backdrop-filter: var(--blur-effect);
     padding: 15px 0;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
-
 
 .site-header-luxury .container-luxury {
     display: flex;
