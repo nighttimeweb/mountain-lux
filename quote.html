@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Request a Quote - Mountain Life</title>
+<!-- Favicons for all devices -->
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="favicon/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon/favicon-64x64.png">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="128x128" href="favicon/favicon-128x128.png">
+<link rel="icon" type="image/png" sizes="256x256" href="favicon/favicon-256x256.png">
+
+<!-- Apple Touch Icon -->
+<link rel="apple-touch-icon" sizes="180x180" href="favicon/favicon-180x180.png">
+
+<!-- Android Chrome -->
+<link rel="icon" type="image/png" sizes="192x192" href="favicon/favicon-192x192.png">
+
+<!-- Legacy ICO -->
+<link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon">
+
+<!-- Optional Theme Colors -->
+<meta name="msapplication-TileColor" content="#1A4D2E">
+<meta name="theme-color" content="#1A4D2E">
+
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+  <style>
+        /* --- Header (Desktop & Global) --- */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  padding: 15px 0;
+  border-bottom: 1px solid transparent;
+  transition: background-color var(--transition-medium), border-color var(--transition-medium);
+}
+
+.site-header.scrolled {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid var(--grey-medium);
+}
+
+.site-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-header .logo a {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--green-dark);
+  text-decoration: none;
+}
+
+.main-nav ul {
+  list-style: none;
+  display: flex;
+}
+
+.main-nav ul li {
+  margin-left: 30px;
+}
+
+.main-nav ul li a {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--charcoal);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 5px;
+}
+
+.main-nav ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--green-primary);
+  transition: width var(--transition-medium);
+}
+
+.main-nav ul li a:hover::after {
+  width: 100%;
+}
+
+/* --- Dropdown (Desktop Only) --- */
+.has-dropdown {
+position: relative;
+}
+
+.has-dropdown .dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--green-light); /* Light green tint */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+  border-radius: 12px; /* Slightly more rounded */
+  min-width: 200px;
+  padding: 10px 0;
+  z-index: 1000;
+}
+
+
+.has-dropdown:hover .dropdown {
+display: block;
+}
+
+.has-dropdown .dropdown li {
+margin: 0;
+}
+
+.has-dropdown .dropdown li a {
+display: block;
+padding: 10px 20px;
+color: var(--charcoal);
+font-weight: 500;
+white-space: nowrap;
+}
+
+.has-dropdown .dropdown li a:hover {
+background-color: var(--green-light);
+color: var(--green-dark);
+}
+
+/* --- Mobile Header Adjustments --- */
+@media (max-width: 768px) {
+.site-header {
+  padding: 10px 0;
+}
+
+.site-header .container {
+  display: grid;
+  grid-template-areas:
+    "logo toggle"
+    "nav nav";
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+
+.site-header .logo {
+  grid-area: logo;
+}
+
+.nav-toggle {
+  grid-area: toggle;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.nav-toggle .bar {
+  height: 2px;
+  width: 100%;
+  background-color: var(--green-dark);
+  border-radius: 1px;
+}
+
+.main-nav {
+  grid-area: nav;
+  display: none;
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.main-nav.open {
+  display: block;
+}
+
+.main-nav ul {
+  flex-direction: column;
+  gap: 15px;
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+.main-nav ul li {
+  margin-left: 0;
+}
+
+.site-header .logo a {
+  font-size: 1.5rem;
+}
+
+/* Mobile dropdown overrides */
+.has-dropdown .dropdown {
+  position: static;
+  transform: none;
+  opacity: 1;
+  box-shadow: none;
+  background-color: transparent;
+  padding: 0;
+  display: none;
+}
+
+.has-dropdown.open .dropdown {
+  display: block;
+}
+
+.has-dropdown .dropdown li a {
+  padding: 8px 0;
+  color: var(--charcoal);
+  font-size: 0.95rem;
+}
+}
+
+/* === Quote Form Container as Card === */
+.quote-card {
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.07);
+  padding: 60px 40px;
+  max-width: 920px;
+  margin: 60px auto;
+}
+
+/* === Clean Heading === */
+.quote-card h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1d4033;
+  margin-bottom: 40px;
+}
+
+/* === Grid Layout === */
+.wpcf7-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.form-group {
+  flex: 1 1 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.half {
+  flex: 1 1 calc(50% - 10px);
+}
+
+/* === Inputs and Selects === */
+.form-group input,
+.form-group select {
+  padding: 14px 16px;
+  font-size: 1rem;
+  border: 1px solid #d6e3dc;
+  border-radius: 10px;
+  background-color: #f8faf9;
+  transition: border-color 0.3s ease, background-color 0.2s;
+  appearance: none;
+  font-family: inherit;
+}
+
+/* Custom dropdown arrow */
+.form-group select {
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2334a853'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 12px;
+}
+
+/* === Labels === */
+.form-group label {
+  margin-bottom: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #1f2e26;
+}
+
+/* === Radio Groups === */
+.radio-group,
+.tobacco-group {
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-left: 4px;
+  margin-top: -10px;
+}
+
+.radio-group label,
+.tobacco-group label {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* === reCAPTCHA === */
+.g-recaptcha {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/* === Submit Button === */
+.cta-button {
+  background-color: #34a853;
+  color: white;
+  border: none;
+  padding: 16px;
+  font-size: 1rem;
+  border-radius: 40px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 280px;
+  margin: 40px auto 0;
+  display: block;
+  box-shadow: 0 10px 20px rgba(52, 168, 83, 0.15);
+}
+
+.cta-button:hover {
+  background-color: #2e8b57;
+}
+/* === Thank You Modal === */
+.thank-you-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.55);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(3px);
+}
+
+.thank-you-card {
+  background: #ffffff;
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  animation: fadeInUp 0.3s ease-out;
+}
+
+.thank-you-card h2 {
+  font-size: 1.8rem;
+  color: #1d4033;
+  margin-bottom: 16px;
+}
+
+.thank-you-card p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 24px;
+}
+
+/* Fade animation */
+@keyframes fadeInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+  </style>
+  
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="logo" data-aos="fade-down">
+        <a href="index.html#">Mountain Life</a>
+      </div>
+  
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+  
+      <nav class="main-nav" data-aos="fade-down" data-aos-delay="100">
+        <ul>
+          <li><a href="index.html#">Home</a></li>
+  
+          <li class="has-dropdown" data-dropdown>
+            <a href="index.html#annuities">Annuities</a>
+            <ul class="dropdown">
+              <li><a href="index.html#annuities">Annuities</a></li>
+              <li><a href="annuity-calculator.html">Annuity Calculator</a></li>
+            </ul>
+          </li>
+  
+          <li><a href="index.html#about">About Us</a></li>
+          <li><a href="index.html#contact">Contact Us</a></li>
+  
+          <li class="has-dropdown" data-dropdown>
+            <a href="#">Agent Resources</a>
+            <ul class="dropdown">
+              <li><a href="agent-portal.html">Agent Portal</a></li>
+              <li><a href="agent-appointment.html">Agent Appointment</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+
+
+  <main>
+    <section class="quote-form">
+      <div class="container">
+        <h2>Get Your Free Insurance Quote</h2>
+        <form action="/request-a-quote/#wpcf7-f859-p264-o1" method="post" class="wpcf7-form" novalidate="novalidate">
+          <input type="hidden" name="_wpcf7" value="859">
+          <input type="hidden" name="_wpcf7_version" value="6.0.6">
+          <input type="hidden" name="_wpcf7_locale" value="en_US">
+          <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f859-p264-o1">
+          <input type="hidden" name="_wpcf7_container_post" value="264">
+
+          <div class="form-group"><label for="InsurancePolicyDesired">Insurance Policy Desired</label>
+            <select name="InsurancePolicyDesired" required>
+              <option value="">—Please choose an option—</option>
+              <option value="Whole Life">Whole Life</option>
+              <option value="10 Year Level term">10 Year Level term</option>
+              <option value="20 Year Level Term">20 Year Level Term</option>
+              <option value="Juvenile 10 Pay Life Policy">Juvenile 10 Pay Life Policy</option>
+              <option value="Senior Life I and II">Senior Life I and II</option>
+            </select>
+          </div>
+
+          <div class="form-group half"><input type="text" name="first-name" placeholder="First Name" required></div>
+          <div class="form-group half"><input type="text" name="last-name" placeholder="Last Name" required></div>
+          <div class="form-group half"><input type="number" name="FaceAmount" placeholder="Face Amount (e.g., 25000)" required></div>
+          <div class="form-group half"><input type="number" name="Age" placeholder="Age" required></div>
+
+          <div class="form-group radio-group"><label>Gender:</label>
+            <label><input type="radio" name="Gender" value="Male" checked> Male</label>
+            <label><input type="radio" name="Gender" value="Female"> Female</label>
+          </div>
+
+          <div class="form-group tobacco-group"><label>Use Tobacco?</label>
+            <label><input type="radio" name="UseTobacco" value="Yes"> Yes</label>
+            <label><input type="radio" name="UseTobacco" value="No" checked> No</label>
+          </div>
+
+          <div class="form-group half"><input type="email" name="email" placeholder="Email" required></div>
+          <div class="form-group half"><input type="tel" name="Phone" placeholder="Phone"></div>
+          <div class="form-group half"><input type="text" name="BestTimetoContact" placeholder="Best Time to Contact"></div>
+          <div class="form-group half"><input type="text" name="ZipCode" placeholder="Zip Code"></div>
+
+          <div class="form-group">
+            <div class="g-recaptcha" data-sitekey="6LcklDEbAAAAAPXFKFwHiyIRMixyC8zzpCx_P6IT"></div>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="cta-button">Submit</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+  <div id="thankYouModal" class="thank-you-overlay" style="display: none;">
+    <div class="thank-you-card">
+      <h2>Thank You!</h2>
+      <p>We’ve received your request. One of our team members will get back to you shortly.</p>
+      <button onclick="closeThankYou()" class="cta-button">Close</button>
+    </div>
+  </div>
+  
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-meta">
+        &copy; 2025 Mountain Life Insurance Company.
+        <span class="divider">|</span>
+        Built by <a href="https://nighttimeweb.com" target="_blank" rel="noopener noreferrer">Night Time Website Development</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
