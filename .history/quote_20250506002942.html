@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Request a Quote - Mountain Life</title>
+<!-- Favicons for all devices -->
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="favicon/favicon-48x48.png">
+<link rel="icon" type="image/png" sizes="64x64" href="favicon/favicon-64x64.png">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="128x128" href="favicon/favicon-128x128.png">
+<link rel="icon" type="image/png" sizes="256x256" href="favicon/favicon-256x256.png">
+
+<!-- Apple Touch Icon -->
+<link rel="apple-touch-icon" sizes="180x180" href="favicon/favicon-180x180.png">
+
+<!-- Android Chrome -->
+<link rel="icon" type="image/png" sizes="192x192" href="favicon/favicon-192x192.png">
+
+<!-- Legacy ICO -->
+<link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon">
+
+<!-- Optional Theme Colors -->
+<meta name="msapplication-TileColor" content="#1A4D2E">
+<meta name="theme-color" content="#1A4D2E">
+
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+  <style>
+
+  body {
+    font-family: var(--font-body);
+    margin: 0;
+    padding: 0;
+    background-color: var(--deep-forest-green);
+    color: var(--text-primary);
+  }
+
+  .quote-form {
+    padding: 100px 20px;
+    background-color: var(--deep-forest-green);
+  }
+
+  .quote-form h2 {
+    text-align: center;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-family: var(--font-heading);
+    color: var(--clean-white);
+    margin-bottom: 60px;
+  }
+
+  .wpcf7-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .wpcf7-form {
+      grid-template-columns: 1fr 1fr;
+    }
+    .form-full {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-group label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 14px 16px;
+    font-size: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--clean-white);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .form-group input::placeholder {
+    color: var(--text-secondary);
+  }
+
+  .form-group select {
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23b8860b'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 12px;
+    appearance: none;
+  }
+
+  .radio-group,
+  .tobacco-group {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    grid-column: 1 / -1;
+  }
+
+  .radio-group label,
+  .tobacco-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+  }
+
+  .g-recaptcha {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    grid-column: 1 / -1;
+  }
+
+  .cta-button {
+    background-color: var(--accent-gold);
+    color: var(--deep-forest-green);
+    border: none;
+    padding: 16px 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
+    box-shadow: 0 8px 20px rgba(184, 134, 11, 0.3);
+    width: 100%;
+    max-width: 280px;
+    margin: 40px auto 0;
+    display: block;
+  }
+
+  .cta-button:hover {
+    background-color: var(--clean-white);
+    color: var(--deep-forest-green);
+    transform: translateY(-3px);
+  }
+
+  .thank-you-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.55);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(3px);
+  }
+
+  .thank-you-card {
+    background: #ffffff;
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    animation: fadeInUp 0.3s ease-out;
+    color: #1a3a2a;
+  }
+
+  .thank-you-card h2 {
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+  }
+
+  .thank-you-card p {
+    font-size: 1rem;
+    margin-bottom: 24px;
+    color: #444;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+</style>
+
+  </style>
+  
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <div class="logo" data-aos="fade-down">
+        <a href="index.html#">Mountain Life</a>
+      </div>
+  
+      <button class="nav-toggle" aria-label="Toggle navigation">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+  
+      <nav class="main-nav" data-aos="fade-down" data-aos-delay="100">
+        <ul>
+          <li><a href="index.html#">Home</a></li>
+  
+          <li class="has-dropdown" data-dropdown>
+            <a href="index.html#annuities">Annuities</a>
+            <ul class="dropdown">
+              <li><a href="index.html#annuities">Annuities</a></li>
+              <li><a href="annuity-calculator.html">Annuity Calculator</a></li>
+            </ul>
+          </li>
+  
+          <li><a href="index.html#about">About Us</a></li>
+          <li><a href="index.html#contact">Contact Us</a></li>
+  
+          <li class="has-dropdown" data-dropdown>
+            <a href="#">Agent Resources</a>
+            <ul class="dropdown">
+              <li><a href="agent-portal.html">Agent Portal</a></li>
+              <li><a href="agent-appointment.html">Agent Appointment</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+
+
+  <main>
+    <section class="quote-form">
+      <div class="container">
+        <h2>Get Your Free Insurance Quote</h2>
+        <form action="/request-a-quote/#wpcf7-f859-p264-o1" method="post" class="wpcf7-form" novalidate="novalidate">
+          <input type="hidden" name="_wpcf7" value="859">
+          <input type="hidden" name="_wpcf7_version" value="6.0.6">
+          <input type="hidden" name="_wpcf7_locale" value="en_US">
+          <input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f859-p264-o1">
+          <input type="hidden" name="_wpcf7_container_post" value="264">
+
+          <div class="form-group"><label for="InsurancePolicyDesired">Insurance Policy Desired</label>
+            <select name="InsurancePolicyDesired" required>
+              <option value="">—Please choose an option—</option>
+              <option value="Whole Life">Whole Life</option>
+              <option value="10 Year Level term">10 Year Level term</option>
+              <option value="20 Year Level Term">20 Year Level Term</option>
+              <option value="Juvenile 10 Pay Life Policy">Juvenile 10 Pay Life Policy</option>
+              <option value="Senior Life I and II">Senior Life I and II</option>
+            </select>
+          </div>
+
+          <div class="form-group half"><input type="text" name="first-name" placeholder="First Name" required></div>
+          <div class="form-group half"><input type="text" name="last-name" placeholder="Last Name" required></div>
+          <div class="form-group half"><input type="number" name="FaceAmount" placeholder="Face Amount (e.g., 25000)" required></div>
+          <div class="form-group half"><input type="number" name="Age" placeholder="Age" required></div>
+
+          <div class="form-group radio-group"><label>Gender:</label>
+            <label><input type="radio" name="Gender" value="Male" checked> Male</label>
+            <label><input type="radio" name="Gender" value="Female"> Female</label>
+          </div>
+
+          <div class="form-group tobacco-group"><label>Use Tobacco?</label>
+            <label><input type="radio" name="UseTobacco" value="Yes"> Yes</label>
+            <label><input type="radio" name="UseTobacco" value="No" checked> No</label>
+          </div>
+
+          <div class="form-group half"><input type="email" name="email" placeholder="Email" required></div>
+          <div class="form-group half"><input type="tel" name="Phone" placeholder="Phone"></div>
+          <div class="form-group half"><input type="text" name="BestTimetoContact" placeholder="Best Time to Contact"></div>
+          <div class="form-group half"><input type="text" name="ZipCode" placeholder="Zip Code"></div>
+
+          <div class="form-group">
+            <div class="g-recaptcha" data-sitekey="6LcklDEbAAAAAPXFKFwHiyIRMixyC8zzpCx_P6IT"></div>
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="cta-button">Submit</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+  <div id="thankYouModal" class="thank-you-overlay" style="display: none;">
+    <div class="thank-you-card">
+      <h2>Thank You!</h2>
+      <p>We’ve received your request. One of our team members will get back to you shortly.</p>
+      <button onclick="closeThankYou()" class="cta-button">Close</button>
+    </div>
+  </div>
+  
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-meta">
+        &copy; 2025 Mountain Life Insurance Company.
+        <span class="divider">|</span>
+        Built by <a href="https://nighttimeweb.com" target="_blank" rel="noopener noreferrer">Night Time Website Development</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

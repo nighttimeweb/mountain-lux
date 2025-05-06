@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Request a Quote - Mountain Life</title>
-  <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
@@ -179,7 +178,174 @@
       font-size: 1.8rem;
       margin-bottom: 16px;
     }
+/* --- Header --- */
+.site-header-luxury {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 20px 0;
+    background: rgba(26, 58, 42, 0.5); /* Keep dark green tint, slightly opaque */
+    backdrop-filter: blur(28px); /* Frosted effect */
+    -webkit-backdrop-filter: blur(28px);
+    transition: background-color var(--transition-smooth), padding var(--transition-smooth), box-shadow var(--transition-smooth);
+}
 
+.site-header-luxury.scrolled {
+    background: rgba(255, 255, 255, 0.2); /* See-through white */
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    padding: 15px 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+
+
+.site-header-luxury .container-luxury {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* --- Logo Fix --- */
+.logo-luxury a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.site-logo {
+    max-height: 64px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+  }
+  
+/* --- Navigation --- */
+.main-nav-luxury ul {
+    list-style: none;
+    display: flex;
+    gap: 35px;
+}
+
+.main-nav-luxury ul li a {
+    font-size: 1rem;
+    font-weight: 500; /* Slightly bolder for better legibility */
+    color: rgba(255, 255, 255, 0.9); /* Brighter text */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); /* Soft shadow for contrast */
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 8px;
+    transition: color var(--transition-fast);
+}
+
+.main-nav-luxury ul li a:hover {
+    color: var(--clean-white);
+}
+
+.main-nav-luxury ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 1px;
+    background-color: var(--accent-gold);
+    transition: width var(--transition-smooth);
+}
+
+.main-nav-luxury ul li a:hover::after {
+    width: 100%;
+}
+
+/* --- Dropdown Menu --- */
+.dropdown-luxury {
+    position: relative;
+}
+
+.dropdown-menu-luxury {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgba(26, 58, 42, 0.9); /* Dark green semi-transparent */
+    border: 1px solid rgba(255, 255, 255, 0.80);
+    backdrop-filter: blur(18px); /* Stronger blur */
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: 12px;
+    min-width: 200px;
+    padding: 10px 0;
+    margin-top: 10px;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown-luxury:hover .dropdown-menu-luxury {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu-luxury li {
+    margin: 0;
+}
+
+.dropdown-menu-luxury li a {
+    display: block;
+    padding: 12px 20px;
+    color: var(--clean-white); /* High contrast text */
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.dropdown-menu-luxury li a:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: var(--accent-gold);
+}
+
+/* Header CTA Button */
+.cta-button-header {
+    background: var(--accent-gold);
+    color: var(--deep-forest-green);
+    padding: 10px 25px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+    margin-left: 20px;
+}
+
+.cta-button-header:hover {
+    background-color: var(--clean-white);
+    color: var(--deep-forest-green);
+    transform: scale(1.05);
+}
+
+/* Mobile Nav Toggle */
+.mobile-nav-toggle {
+    display: none; /* Hidden by default */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+}
+
+.mobile-nav-toggle span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    background-color: var(--clean-white);
+    margin: 5px 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
     .thank-you-card p {
       font-size: 1rem;
       margin-bottom: 24px;
@@ -300,6 +466,5 @@
       <button onclick="closeThankYou()" class="cta-button">Close</button>
     </div>
   </div>
-  <script src="script.js"></script>
 </body>
 </html>

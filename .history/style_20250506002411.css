@@ -901,28 +901,30 @@ section {
       font-size: 1.5rem;
     }
   }
-  body {
-    font-family: 'Lato', sans-serif;
+  /* === Quote Page Styles - Luxury Mountain Life Theme === */
+
+body {
+    font-family: var(--font-body);
     margin: 0;
     padding: 0;
-    background-color: #1a3a2a; /* Deep Forest Green */
-    color: #e8e6e3; /* Text Primary */
+    background-color: var(--deep-forest-green);
+    color: var(--text-primary);
   }
   
   .quote-form {
     padding: 100px 20px;
-    background-color: #1a3a2a; /* Deep Forest Green */
+    background-color: var(--deep-forest-green);
   }
   
   .quote-form h2 {
     text-align: center;
     font-size: clamp(2rem, 4vw, 3rem);
-    font-family: 'Playfair Display', serif; /* Heading Font */
-    color: #f8f9fa; /* Clean White */
+    font-family: var(--font-heading);
+    color: var(--clean-white);
     margin-bottom: 60px;
   }
   
-  form.wpcf7-form {
+  .wpcf7-form {
     display: grid;
     grid-template-columns: 1fr;
     gap: 30px;
@@ -931,7 +933,7 @@ section {
   }
   
   @media (min-width: 768px) {
-    form.wpcf7-form {
+    .wpcf7-form {
       grid-template-columns: 1fr 1fr;
     }
     .form-full {
@@ -948,7 +950,7 @@ section {
     margin-bottom: 8px;
     font-weight: 600;
     font-size: 0.95rem;
-    color: #a0a0a0; /* Text Secondary */
+    color: var(--text-secondary);
   }
   
   .form-group input,
@@ -958,12 +960,12 @@ section {
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 10px;
     background-color: rgba(255, 255, 255, 0.05);
-    color: #f8f9fa; /* Clean White */
+    color: var(--clean-white);
     transition: background-color 0.3s ease, border-color 0.3s ease;
   }
   
   .form-group input::placeholder {
-    color: rgba(255, 255, 255, 0.5);
+    color: var(--text-secondary);
   }
   
   .form-group select {
@@ -977,10 +979,10 @@ section {
   .radio-group,
   .tobacco-group {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
     align-items: center;
-    grid-column: 1 / -1;
+    gap: 20px;
+    color: var(--text-secondary);
+    font-weight: 500;
   }
   
   .radio-group label,
@@ -988,27 +990,25 @@ section {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 1rem;
-    color: #a0a0a0; /* Text Secondary */
+    font-size: 0.95rem;
   }
   
   .g-recaptcha {
     display: flex;
     justify-content: center;
     margin-top: 10px;
-    grid-column: 1 / -1;
   }
   
   .cta-button {
-    background-color: #b8860b; /* Accent Gold */
-    color: #1a3a2a; /* Deep Forest Green */
+    background-color: var(--accent-gold);
+    color: var(--deep-forest-green);
     border: none;
     padding: 16px 30px;
     font-size: 1rem;
     font-weight: 700;
     border-radius: 50px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color var(--transition-fast), transform var(--transition-fast);
     box-shadow: 0 8px 20px rgba(184, 134, 11, 0.3);
     width: 100%;
     max-width: 280px;
@@ -1017,67 +1017,12 @@ section {
   }
   
   .cta-button:hover {
-    background-color: #f8f9fa; /* Clean White */
-    color: #1a3a2a; /* Deep Forest Green */
+    background-color: var(--clean-white);
+    color: var(--deep-forest-green);
     transform: translateY(-3px);
   }
   
-  .thank-you-overlay {
-    position: fixed;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.55);
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(3px);
-  }
-  
-  .thank-you-card {
-    background: #ffffff;
-    padding: 40px 30px;
-    border-radius: 20px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
-    text-align: center;
-    max-width: 400px;
-    width: 90%;
-    animation: fadeInUp 0.3s ease-out;
-    color: #1a3a2a;
-  }
-  
-  .glass-card {
-    background: rgba(255, 255, 255, 0.05); /* faint white tint */
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
-    padding: 60px 40px;
-    max-width: 960px;
-    margin: 0 auto;
-  }
-  
-  .thank-you-card h2 {
-    font-size: 1.8rem;
-    margin-bottom: 16px;
-  }
-  
-  .thank-you-card p {
-    font-size: 1rem;
-    margin-bottom: 24px;
-    color: #444;
-  }
-  
-  @keyframes fadeInUp {
-    from {
-      transform: translateY(20px);
-      opacity: 0;
-    }
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
+  /* === End Luxury Quote Page Styles === */
   
 }
 
