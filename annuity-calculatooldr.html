@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Annuity Payout Calculator | Mountain Life</title>
+  <meta name="description" content="Estimate your annuity growth and plan your future with Mountain Life." />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<header class="site-header-luxury">
+  <div class="container-luxury">
+    <div class="logo-luxury">
+      <a href="index.html">Mountain Life</a>
+    </div>
+    <nav class="main-nav-luxury">
+      <ul>
+        <li><a href="index.html#">Home</a></li>
+        <li><a href="index.html#annuities">Annuities</a></li>
+        <li><a href="index.html#about">About Us</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li class="dropdown-luxury">
+          <a href="#">Agent Resources</a>
+          <ul class="dropdown-menu-luxury">
+            <li><a href="agent-portal.html">Agent Portal</a></li>
+            <li><a href="agent-appointment.html">Agent Appointment</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <a href="quote.html" class="cta-button-header">Get a Quote</a>
+    <button class="mobile-nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main style="padding-top:120px;">
+  <div class="container-luxury glass-panel">
+    <h1 style="text-align:center;">Annuity Payout Calculator</h1>
+    <p style="text-align:center; color:var(--text-secondary); margin-bottom:2em;">Estimate how your money can grow with our Secure Summit™ annuity.</p>
+
+    <div class="intro-grid">
+      <div class="intro-text">
+        <label>APY (Rate varies by duration)</label>
+        <div class="apy-display" id="apyDisplay">5.75%</div>
+
+        <label for="investmentAmount" style="margin-top:1em;">Investment amount ($1,000 - $1,000,000)</label>
+        <input type="number" id="investmentAmount" value="50000" min="1000" max="1000000">
+
+        <label for="investmentDuration" style="margin-top:1em;">Investment duration</label>
+        <input type="range" id="investmentDuration" min="1" max="10" value="5">
+        <div class="duration-label" id="durationLabel">5 years</div>
+      </div>
+
+      <div class="results-column">
+        <div class="results-display">
+          <div>
+            <div class="result-label">Total interest earned</div>
+            <div class="result-value" id="totalInterest">$0.00</div>
+          </div>
+          <div>
+            <div class="result-label">Projected account balance</div>
+            <div class="result-value" id="projectedBalance">$0.00</div>
+          </div>
+        </div>
+
+        <div class="chart-container" style="margin-top:2em;">
+          <canvas id="projectionChart"></canvas>
+        </div>
+
+        <p class="disclaimer">For illustrative purposes only. Not a guarantee of performance.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer-luxury">
+  <div class="container-luxury footer-content">
+    <div class="footer-logo-contact">
+      <div class="logo-luxury">Mountain Life</div>
+      <p>2416 Sir Barton Way Suite 110<br>Lexington, Kentucky 40509</p>
+      <p><a href="tel:18008886542">1-800-888-6542</a> | <a href="mailto:contact@mountainlife.com">contact@mountainlife.com</a></p>
+    </div>
+    <div class="footer-links">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html#annuities">Annuities</a></li>
+        <li><a href="index.html#about">About Us</a></li>
+        <li><a href="quote.html">Get a Quote</a></li>
+        <li><a href="agent-appointment.html">Become an Agent</a></li>
+      </ul>
+    </div>
+    <div class="footer-social-legal">
+      <h4>Connect</h4>
+      <a href="https://www.linkedin.com/company/mountain-life-insurance-company" target="_blank" rel="noopener noreferrer" class="social-link">LinkedIn</a>
+      <div class="footer-legal">
+        &copy; 2025 Mountain Life Insurance Company. All rights reserved.<br>
+        Guarantees based on the claims-paying ability of the insurer.<br>
+        <span class="footer-credit">Design by Manus</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+</body>
+</html>
